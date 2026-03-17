@@ -32,9 +32,11 @@ class AuthenticatedSessionController extends Controller
         ]);
         
         dd([
-    'token' => $request->input('g-recaptcha-response'),
-    'body' => $response->body(),
-    'data' => $response->json()
+    'token_length' => strlen($token ?? ''),
+    'token_empty' => empty($token),
+    'token_preview' => substr($token ?? '', 0, 50),
+    'app_url' => config('app.url'),
+    'data' => $data
 ]);
         $data = $response->json();
         dd($data);
