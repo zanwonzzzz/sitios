@@ -43,11 +43,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
             'secret'   => env('CAPTCHA_KEY_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
         ]);
-
+        
         $data = $response->json();
 
 
