@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
             'response' => $request->input('g-recaptcha-response'),
         ]);
 
+            dd($request->input('g-recaptcha-response'));
         $data = $response->json();
 
         dd($data);
