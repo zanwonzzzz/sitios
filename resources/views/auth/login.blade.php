@@ -42,6 +42,13 @@
 
 <script>
     function onCaptchaComplete(token) {
+        console.log('Token generado:', token);
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'g-recaptcha-response';
+        input.value = token;
+        document.querySelector('form').appendChild(input);
+        console.log('Input agregado, enviando form...');
         document.querySelector('form').submit();
     }
 </script>
