@@ -26,7 +26,7 @@
 
        <div class="g-recaptcha" 
      data-sitekey="6Lea1YwsAAAAAHFOasi_oAnYBECf8hXYNL_3ooOO"
-     data-callback="habilitarBoton">
+     data-callback="onCaptchaComplete">
 </div>
 
 <div class="flex items-center justify-end mt-4">
