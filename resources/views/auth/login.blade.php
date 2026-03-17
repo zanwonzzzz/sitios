@@ -25,8 +25,8 @@
         </div>
 
        <div class="g-recaptcha" 
-     data-sitekey="6Lea1YwsAAAAAHFOasi_oAnYBECf8hXYNL_3ooOO"
-     data-callback="onCaptchaComplete">
+     data-sitekey="{{ env('CAPTCHA_KEY')}}"
+     data-callback="habilitarBoton">
 </div>
 
 <div class="flex items-center justify-end mt-4">
@@ -41,15 +41,11 @@
 </div>
 
 <script>
-    function onCaptchaComplete(token) {
-        console.log('Token generado:', token);
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'g-recaptcha-response';
-        input.value = token;
-        document.querySelector('form').appendChild(input);
-        console.log('Input agregado, enviando form...');
-        document.querySelector('form').submit();
+    function habilitarBoton(token) {
+        var btn = document.getElementById('btn-login');
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
     }
 </script>
 </x-guest-layout>
