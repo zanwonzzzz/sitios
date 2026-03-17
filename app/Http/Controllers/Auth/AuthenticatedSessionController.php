@@ -30,6 +30,9 @@ class AuthenticatedSessionController extends Controller
             'secret'   => env('CAPTCHA_KEY_SECRET'),
             'response' => $request->input('g-recaptcha-response'),
         ]);
+
+        $data = $response->json();
+        dd($data);
         
         dd([
     'token_length' => strlen($token ?? ''),
@@ -38,8 +41,7 @@ class AuthenticatedSessionController extends Controller
     'app_url' => config('app.url'),
     'data' => $data
 ]);
-        $data = $response->json();
-        dd($data);
+        
         if (!$data['success']) {
             return back()->withErrors(['captcha' => 'Captcha inválido']);
         }
