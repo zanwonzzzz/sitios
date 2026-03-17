@@ -26,22 +26,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        \Log::info('Token: ' . $request->input('g-recaptcha-response'));
-        \Log::info('Secret: ' . env('CAPTCHA_KEY_SECRET'));
 
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-    'secret'   => env('CAPTCHA_KEY_SECRET'),
-    'response' => $request->input('g-recaptcha-response'),
-]);
+            'secret'   => env('CAPTCHA_KEY_SECRET'),
+            'response' => $request->input('g-recaptcha-response'),
+        ]);
 
         $data = $response->json();
-        
-       dd([
-    'token' => substr($request->input('g-recaptcha-response'), 0, 30),
-    'secret_preview' => substr(env('CAPTCHA_KEY_SECRET'), 0, 10),
-    'response' => $response->json(),
-    'status' => $response->status(),
-]);
         
         if (!$data['success']) {
             return back()->withErrors(['captcha' => 'Captcha inválido']);
