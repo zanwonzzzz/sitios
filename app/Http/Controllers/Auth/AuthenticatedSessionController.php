@@ -34,8 +34,10 @@ class AuthenticatedSessionController extends Controller
         $data = $response->json();
         
        dd([
-    'all' => $request->all(),
-    'token' => $request->input('g-recaptcha-response'),
+    'token' => substr($request->input('g-recaptcha-response'), 0, 30),
+    'secret_preview' => substr(env('CAPTCHA_KEY_SECRET'), 0, 10),
+    'response' => $response->json(),
+    'status' => $response->status(),
 ]);
         
         if (!$data['success']) {
