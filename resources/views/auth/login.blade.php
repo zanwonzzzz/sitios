@@ -41,11 +41,8 @@
 </div>
 
 <script>
-    function habilitarBoton(token) {
-        var btn = document.getElementById('btn-login');
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
+    function onCaptchaComplete(token) {
+        document.querySelector('form').submit();
     }
 </script>
 </x-guest-layout>
