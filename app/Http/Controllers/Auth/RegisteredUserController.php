@@ -48,14 +48,12 @@ class RegisteredUserController extends Controller
             'response' => $request->input('g-recaptcha-response'),
         ]);
 
-            dd($request->input('g-recaptcha-response'));
         $data = $response->json();
 
-        dd($data);
 
-        if (!$data['success']) {
+       /* if (!$data['success']) {
             return back()->withErrors(['captcha' => 'Captcha inválido']);
-        }
+        }*/
 
         event(new Registered($user));
 

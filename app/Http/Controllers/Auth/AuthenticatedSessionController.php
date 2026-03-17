@@ -33,9 +33,9 @@ class AuthenticatedSessionController extends Controller
 
         $data = $response->json();
 
-        if (!$data['success']) {
+        /*if (!$data['success']) {
             return back()->withErrors(['captcha' => 'Captcha inválido']);
-        }
+        }*/
 
         $request->authenticate();
 
