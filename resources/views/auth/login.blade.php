@@ -46,4 +46,14 @@
             </x-primary-button>
         </div>
     </form>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            var token = grecaptcha.getResponse();
+            if (!token) {
+                e.preventDefault();
+                alert('Por favor completa el captcha');
+            }
+        });
+    </script>
 </x-guest-layout>
