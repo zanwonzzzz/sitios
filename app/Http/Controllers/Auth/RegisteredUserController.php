@@ -50,6 +50,8 @@ class RegisteredUserController extends Controller
 
         $data = $response->json();
 
+        dd($data);
+
         if (!$data['success']) {
             return back()->withErrors(['captcha' => 'Captcha inválido']);
         }
