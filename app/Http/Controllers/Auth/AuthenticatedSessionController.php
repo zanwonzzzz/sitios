@@ -32,7 +32,6 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         $data = $response->json();
-        dd($data);
         
         dd([
     'token_length' => strlen($token ?? ''),
