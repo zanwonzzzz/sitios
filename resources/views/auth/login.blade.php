@@ -47,13 +47,21 @@
         </div>
     </form>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            var token = grecaptcha.getResponse();
-            if (!token) {
-                e.preventDefault();
-                alert('Por favor completa el captcha');
-            }
-        });
-    </script>
+   <script>
+    function onCaptchaSuccess(token) {
+        console.log('Captcha completado:', token);
+    }
+    function onCaptchaExpired() {
+        console.log('Captcha expirado');
+    }
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+        var token = grecaptcha.getResponse();
+        console.log('Token al enviar:', token);
+        if (!token) {
+            e.preventDefault();
+            alert('Por favor completa el captcha primero');
+        }
+    });
+</script>
 </x-guest-layout>
