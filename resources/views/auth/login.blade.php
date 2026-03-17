@@ -24,44 +24,28 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <div class="g-recaptcha" data-sitekey="6Lea1YwsAAAAAHFOasi_oAnYBECf8hXYNL_3ooOO"></div>
+       <div class="g-recaptcha" 
+     data-sitekey="6Lea1YwsAAAAAHFOasi_oAnYBECf8hXYNL_3ooOO"
+     data-callback="habilitarBoton">
+</div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+<div class="flex items-center justify-end mt-4">
+    @if (Route::has('password.request'))
+        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+            {{ __('Forgot your password?') }}
+        </a>
+    @endif
+    <x-primary-button id="btn-login" class="ms-3" disabled style="opacity:0.5; cursor:not-allowed;">
+        {{ __('Log in') }}
+    </x-primary-button>
+</div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-
-   <script>
-    function onCaptchaSuccess(token) {
-        console.log('Captcha completado:', token);
+<script>
+    function habilitarBoton(token) {
+        var btn = document.getElementById('btn-login');
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
     }
-    function onCaptchaExpired() {
-        console.log('Captcha expirado');
-    }
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-        var token = grecaptcha.getResponse();
-        console.log('Token al enviar:', token);
-        if (!token) {
-            e.preventDefault();
-            alert('Por favor completa el captcha primero');
-        }
-    });
 </script>
 </x-guest-layout>
